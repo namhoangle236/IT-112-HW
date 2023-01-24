@@ -2,33 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Todo App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customize your MILK!</title>
   </head>
   <body>
-    <h1>Todo List</h1>
-    <div>
-      Add a new todo item:
-      <form action="{{ url_for('add') }}" method="POST">
-        <input type="text" name="todoitem" />
-        <input type="submit" value="Add Item" />
-      </form>
-    </div>
-    <div>
-      <h2>Incomplete Items</h2>
-      <ul>
-        {% for todo in incomplete %}
-        <li style="font-size: 30pt">
-          {{ todo.text }}
-          <a href="{{ url_for('complete', id=todo.id) }}">Mark As Complete</a>
-        </li>
+    <h1>What kind of milk do you like?</h1>
+    <br />
+    <form action="{{ url_for('add') }}" method="POST">
+      <!--Milk name-->
+      <label for="name">What's your milk's name?</label>
+      <input type="text" name="name" id="name" /> <br />
+      <!--Milk color-->
+      <label for="color">Color for your milk?</label>
+      <input type="text" name="color" id="color" /> <br />
+      <!--Milk flavor-->
+      <label for="flavor">What flavor do you want your milk to have?</label>
+      <input type="text" name="flavor" id="flavor" /> <br />
+      <!--pasteurized option-->
+      <label for="pasteurize">pasteurized or not?</label>
+      <select name="pasteurize" id="pasteurize">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+      <br />
+      <!--Button to submit the form-->
+      <button>Add milk to list!</button>
+      <hr />
+    </form>
+    <!--bellow is a table containing the items added to the database-->
+    <table>
+      <thead>
+        <tr>
+          <th>Milk's Name</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for milk in milks %}
+        <tr>
+          <td>{{ milk.name }}</td>
+          <td>
+            <a
+              href="{{ url_for('detail', id=milk.id, name=milk.name, flavor=milk.flavor, color=milk.color, pasteurize=milk.pasteurize) }}"
+              >Milk's detail
+            </a>
+          </td>
+        </tr>
         {% endfor %}
-      </ul>
-      <h2>Completed Items</h2>
-      <ul>
-        {% for todo in complete %}
-        <li style="font-size: 30pt">{{ todo.text }}</li>
-        {% endfor %}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   </body>
 </html>
