@@ -15,11 +15,11 @@ class Milks(db.Model):
     color = db.Column(db.String(50))
     pasteurize = db.Column(db.String(50))
 
-def __init__(self, name, flavor, color):
-   self.name = name
-   self.flavor = flavor
-   self.color = color
-   self.pasteurize = pasteurize
+    def __init__(self, name, flavor, color):
+        self.name = name
+        self.flavor = flavor
+        self.color = color
+        self.pasteurize = pasteurize
 
 # create / use the database
 with app.app_context():
@@ -54,7 +54,8 @@ def detail():
 
     return f'Milk name: {name}, flavor: {flavor}, color: {color}, is pasteurized: {pasteurize}'
     
-
+# Note: better way to get a single record: Milks.query.filter_by(id=2).first(), check info:
+# https://www.youtube.com/watch?v=JKoxrqis0Co&list=PLA5mOwB4xQtSldcetzUYWYEKSEQ5cDIo6&index=12
 
     
 if __name__ == "__main__":
