@@ -15,7 +15,7 @@ class Milks(db.Model):
     color = db.Column(db.String(50))
     pasteurize = db.Column(db.String(50))
 
-    def __init__(self, name, flavor, color):
+    def __init__(self, name, flavor, color, pasteurize):
         self.name = name
         self.flavor = flavor
         self.color = color
